@@ -1,366 +1,359 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+    <title>Developing Extensions with Backbone.js, Require.js, and Extbase</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/custom.css">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-	<body>
+  <body>
 
-		<div class="reveal">
+    <div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
 
-				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
-				</section>
-
-				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
-
-				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
-					</p>
-				</section>
-
-				<section>
-					<h2>Marvelous Unordered List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  For those of you who like that sort of thing.
-						  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?theme=night#/themes">Night</a> -
-						<a href="?#/themes">Default</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
-				</section>
-
-				<section>
-					<section data-state="alert">
-						<h2>Global State</h2>
-						<p>
-							Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-							will be added as a class to the document element when the slide is open. This lets you
-							apply broader style changes, like switching the background.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-state="blackout">
-						<h2>"blackout"</h2>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-state="soothe">
-						<h2>"soothe"</h2>
-						<a href="#" class="image navigate-next">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(-90deg);">
-						</a>
-					</section>
-				</section>
-
-				<section data-state="customevent">
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) ) {
-        node.className += ' roll';
-      }
-    };
+        <section>
+          <h1>Welcome</h1>
+          <h3>Developing Extensions with Backbone.js, Require.js, and Extbase</h3>
+          <p>
+            <small>Created by <a href="http://hakim.se">Zach Davis</a> / <a href="http://twitter.com/zdavis">@zdavis</a></small>
+          </p>
+        </section>
+        <section>
+          <h2>Who am I?</h2>
+          <ul>
+            <li>Zach Davis</li>
+            <li>Education background (Taught college, English Ph.D.)</li>
+            <li>Switched careers about 10 years ago</li>
+            <li>Founding partner and developer at Cast Iron Coding</li>
+            <li>Spouse, daughter, dog and I live in sunny Portland, OR</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Overview</h2>
+          <ul>
+            <li>Why I think javascript frameworks also make sense on more traditional TYPO3 sites</li>
+            <li>Require.js for managing JS dependencies on TYPO3 projects</li>
+            <li>A whirlwind tour of Backbone.js as a low-level JS framework</li>
+            <li>A look at how we got Extbase to talk to Backbone<br />(this is where it's gonna get a little ugly)</li> 
+          </ul>
+        </section>
+        <section>
+          <section>
+            <h2>Handling Javascript Resources in TYPO3 is kinda imperfect</h2>
+          </section>
+          <section>
+            <h2>Two main ways to include Javascript</h2>
+            <ul>
+              <li class="fragment">Include it in the HTML template</li>
+              <li class="fragment">Include it via typoscript</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Typoscript JS Inclusion</h2>
+            <h4>cObj style</h4>
+            <pre><code data-trim>
+lib.redesign_footerSocialNav {
+  wrap = &lt;nav class=&quot;social&quot;&gt;|&lt;/nav&gt;
+    10 = TEXT
+    100 {
+      value (
+        &lt;div class=&quot;addthis_toolbox addthis_default_style&quot;&gt;
+          &lt;a class=&quot;addthis_button_facebook&quot;&gt;Facebook&lt;/a&gt;
+          &lt;a class=&quot;addthis_button_twitter&quot;&gt;Twitter&lt;/a&gt;
+          &lt;a class=&quot;addthis_button_linkedin&quot;&gt;Linkedin&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;script type=&quot;text/javascript&quot; 
+        src=&quot;http://s7.addthis.com/js/250/addthis_widget.js&quot;&gt;
+        &lt;/script&gt;
+    )
   }
 }
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Typoscript JS Inclusion</h2>
+            <h4>cObj style take 2</h4>
+            <pre><code data-trim>
+headerData {
+  10 = TEXT
+  10.value (
+    &lt;script type=&quot;text/javascript&quot; 
+      src=&quot;http://use.typekit.com/vnw6eob.js&quot;&gt;&lt;/script&gt;
+  )
+}            </code></pre>
+          </section>
+          <section>
+            <h2>Typoscript JS Inclusion</h2>
+            <h4>header style</h4>
+            <pre><code class="json" data-trim>
+  # Include modernizr in the header. All other JS is included in the footer.
+  includeJS {
+    10 = EXT:t3site/Javascript/Libs/modernizr-1.7.min.js
+    30 = EXT:t3site/Javascript/Libs/chosen.jquery.min.js
+  }
 
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
+  includeJSLib {
+    10 = https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js
+    10.external = 1
+  }
 
-				<section>
-					<section>
-						<h2>Fragmented Views</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<ol>
-							<li class="fragment"><code>any type</code></li>
-							<li class="fragment"><em>of view</em></li>
-							<li class="fragment"><strong>fragments</strong></li>
-						</ol>
+  includeJSFooter {
+    20 = EXT:t3site/Sites/Main/Resources/Public/Javascript/Usr/plugins.js
+    30 = EXT:t3site/Sites/Main/Resources/Public/Javascript/Usr/script.js
+  }
 
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's a few styles of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-green">highlight-green</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
+            </code></pre>
+          </section>
+          <section>
+            <h2>Too many options<br />==<br />a poverty of riches</h2>
+            <ul>
+              <li class="fragment">PAGE.javascriptLibs</li>
+              <li class="fragment">PAGE.includeJSlibs[]</li>
+              <li class="fragment">PAGE.includeJSFooterlibs[]</li>
+              <li class="fragment">PAGE.includeJS[]</li>
+              <li class="fragment">PAGE.includeJSFooter[]</li>
+              <li class="fragment">PAGE.jsInline</li>
+              <li class="fragment">PAGE.jsFooterInline</li>
+              <li class="fragment">PAGE.inlineJS</li>
+            </ul>
+          </section>
+          <section>
+            <h2>So many places for things to go wrong</h2>
+            <ul>
+              <li>All these possibilities make it hard to find where JS is being included</li>
+              <li>JS should be managed in JS, not in TS</li>
+              <li>Over time, JS dependencies degrade and get messy</li>
+              <li>Extensions include javascript too, which often breaks things</li>
+              <li>Difficult to create a working asset pipeline out of this</li>
+              <li>Really, really slows down JS development to have to include every file</li>
+            </ul>
+          </section>
+          <section>
+            <h2>If you use a JS framework, you'll have lots of files...</h2>
+            <img src="images/lotsa_files.png" style="height: 350px" />
+            <h3>...and you really don't want to manage them manually in Typoscript.</h3>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Require.js to the rescue!</h2>
+            <blockquote style="margin-top: 2em;">
+              "RequireJS is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments, like Rhino and Node. Using a modular script loader like RequireJS will improve the speed and quality of your code."
+            </blockquote>
+            <p style="margin-top: 2em;">
+              (And it supports IE6, Firefox 2+, Safari 3.2+, Chrome 3+, Opera 10+)
+            </p>
+          </section>
+          <section>
+            <h2>Some warnings</h2>
+            <ul>
+              <li>Require.js <em>requires</em> that you take care in what javascript is included and how it's included</li>
+              <li>If you want to download any TYPO3 extension and have it "just work", this probably isn't for you</li>
+              <li>In many cases you'll have to tweak your jQuery plugins to make them work</li>
+            </ul>
+          </section>
+          <section>
+            <h2>With require.js, we include the require.js library and reference our javascript manifest*</h2>
+            <pre><code class="html">
+&lt;script 
+  data-main=&quot;typo3conf/ext/t3site/Javascript/Source/Main.js&quot; 
+  src=&quot;typo3conf/ext/t3site/Sites/Javascript/Source/Libs/require.js&quot;
+&gt;&lt;/script&gt;
+            </code></pre>
+            <aside>* We're talking about DEV environments now.<br />The include is a bit different in a PROD environment</aside>
+          </section>
+          <section>
+            <h2>Main.js</h2>
+            <pre><code class="javacsript">
+require.config({
+  // We put AMD wrappers around non AMD libraries so 
+  // that we can pass them to modules as dependencies
+  shim: {
+    'underscore': {
+      exports: '_'
+    },
+    'backbone': {
+      deps: ['underscore', 'jquery'],
+      exports: 'Backbone'
+    }
+  },
+  paths: {
+    'backbone': 'Libs/Backbone/backbone',
+    'underscore': 'Libs/Underscore/underscore',
+    'jquery': 'Libs/JQuery/jquery'
+  }
+});
 
-				<section>
-					<h2>Spectacular image!</h2>
-					<a class="image" href="http://lab.hakim.se/meny/" target="_blank">
-						<img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
-					</a>
-				</section>
+require(
+  [
+    // Triggered by markup, not by a script, so we load it explicitly
+    'Libs/Bootstrap/bootstrap-modal',
+    'Libs/Bootstrap/bootstrap-collapse',
 
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>
-					<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe>
-					<script>
-						document.getElementById('slideshare').attributeName = 'allowfullscreen';
-					</script>
-				</section>
+    // Then load the good stuff
+    'Site/Templates',
+    'Ext/Cicevents/EventsApp',
+    'Ext/Cicregister/Cicregister',
+    'Ext/Sjcert/SjApp'
+  ]
+);
 
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take distracting slides off the screen
-						during a presentation.
-					</p>
-				</section>
+            </code></pre>
+            <a href="https://github.com/castiron/Sustainable-Jersey/blob/master/Source/typo3conf/ext/t3site/Sites/Main/Resources/Public/Javascript/Source/Main.js">(view source)</a>
+          </section>
+          <section>
+            <h3>Wrap all JS in define()</h3>
+            <pre><code class="javascript">
+define({
+  color: "black",
+  size: "unisize"
+});
+            </code></pre>
+            <h3>Pass in dependencies</h3>
+            <pre><code class="javascript">
+define(["./cart", "./inventory"], function(cart, inventory) {
+  return {
+      color: "blue",
+      size: "large",
+      addToCart: function() {
+          inventory.decrement(this);
+          cart.add(this);
+      }
+  }
+});
+            </code></pre>
+          </section>
+          <section>
+            <h2>What it looks like in practice (switching to coffescript)</h2>
+            <pre><code class="coffeescript">
+define(['backbone', 'jquery', 'underscore'], (Backbone, $, _) ->
 
-				<section>
-					<h2>Stellar Links</h2>
-					<ul>
-						<li><a href="http://slid.es">Try the online editor</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js">Source code on GitHub</a></li>
-						<li><a href="http://twitter.com/hakimel">Follow me on Twitter</a></li>
-					</ul>
-				</section>
+  class MyModelView extends Backbone.View
 
-				<section>
-					<h1>THE END</h1>
-					<h3>BY Hakim El Hattab / hakim.se</h3>
-				</section>
+    initialize: ->
+      @.template = $("#template-myModelView").html()
 
-			</div>
+    render: ->
+      $(@.el).html(_.template(@.template, {
+        action: @.model
+      }))
+)
+            </code></pre>
+          </section>
+          <section>
+            <h2>Require.js loads dependencies asynchronously</h2>
+            <img src="images/async_loading.png" style="height: 450px" />
+          </section>
+          <section>
+            <h2>In production, we use optimized javascript</h2>
+            <ul>
+              <li>Require.js combines all scripts into one and minifies them via UglifyJS</li>
+              <li>In production, we have a environment = PROD constant that loads the optimized JS</li>
+              <li>Production and dev both have a single line of typoscript for all JS includes</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h2>Require.js Benefits</h2>
+          <ul>
+            <li>Easily break up your javascript project into multiple files</li>
+            <li>Define dependencies in each file</li>
+            <li>Allows for simple dependency injection</li>
+            <li>Optimization done via CLI (using node), easy to integrate into build process</li>
+            <li>Centralized manifest instead of spread out typoscript includes</li>
+          </ul>
+        </section>
+        <section>
+          <section>
+            <h2>Backbone!</h2>
+            <blockquote>
+              "Backbone.js gives structure to web applications by providing models with key-value binding and custom events, collections with a rich API of enumerable functions, views with declarative event handling, and connects it all to your existing API over a RESTful JSON interface."
+            </blockquote>
+          </section>
+          <section>
+            <h2>And Underscore!</h2>
+            <blockquote>
+              "Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux, and Backbone.js's suspenders."
+            </blockquote>
+          </section>
+          <section>
+            <h2>Backbone is a frontend MVC framework</h2>
+            <ul>
+              <li class="fragment">Backbone <strong>TEMPLATES</strong> are like fluid views (but simpler)</li>
+              <li class="fragment">Backbone <strong>VIEWS</strong> are what we tend to think as controllers (but not quite)</li>
+              <li class="fragment">Backbone <strong>MODELS</strong> tend to be pretty flat data models (unlike, say, Rails models)</li>
+              <li class="fragment">Backbone <strong>COLLECTIONS</strong> are a lot like repositories in ExtBase</li>
+              <li class="fragment">Backbone <strong>ROUTES</strong> are like routes.rb in Rails (no real equivalent in T3-land)</li>
+            </ul>
+          </section>
+          <section>
+              <div style="width: 45%; margin-right: 4%; height: 200px; float: left; border: 1px solid red" data-view="items">
+              </div>
+              <div style="width: 45%; height: 200px; float: left; border: 1px solid red" data-view="addItem">
+              </div>
+          </section>
+        </section>
+      </div>
 
-		</div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
 
-		<script>
+    <script>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
 
-		</script>
+    </script>
 
-	</body>
+  </body>
 </html>
