@@ -1,3 +1,47 @@
-aside {
-	font-size: 24px !important;
+.reveal h2 {
+	margin-bottom: .5em;
+}
+
+.reveal aside {
+	font-size: .5em;
+	margin-top: 3em;
+	line-height: 1.25em;
+}
+
+.reveal h2.tight {
+	margin-bottom: 0;
+}
+
+.reveal ul.tight li {
+	margin-bottom: 0;
+}
+
+.reveal .small {
+	font-size: .75em;
+}
+
+.reveal li {
+	margin-bottom: .5em;
+}
+
+.hover-container {
+	padding: 25px !important;
+}
+
+.hover-container input {
+	width: 80%;
+	font-size: .75em;
+}
+
+.hover-container:hover {
+	background-color: #333;
+}
+
+.reveal input[type="submit"] {
+	border: none;
+	width: 80%;
+}
+
+div.clear {
+	clear: both;
 }

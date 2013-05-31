@@ -21,6 +21,10 @@
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
 
+    <script src="js/jquery.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/backbone.js"></script>
+
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
       document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
@@ -42,14 +46,14 @@
           <h1>Welcome</h1>
           <h3>Developing Extensions with Backbone.js, Require.js, and Extbase</h3>
           <p>
-            <small>Created by <a href="http://hakim.se">Zach Davis</a> / <a href="http://twitter.com/zdavis">@zdavis</a></small>
+            <small>Created by <a href="http://castironcoding.com">Zach Davis</a> / <a href="http://twitter.com/zdavis">@zdavis</a></small>
           </p>
         </section>
         <section>
-          <h2>Who am I?</h2>
+          <h2>A little bit about me</h2>
           <ul>
-            <li>Zach Davis</li>
-            <li>Education background (Taught college, English Ph.D.)</li>
+            <li>Zach Davis (<a target="_blank" href="http://twitter.com/zdavis">@zdavis</a>, github: <a target="_blank" href="https://github.com/zdavis">zdavis</a>)</li>
+            <li>Education background</li>
             <li>Switched careers about 10 years ago</li>
             <li>Founding partner and developer at Cast Iron Coding</li>
             <li>Spouse, daughter, dog and I live in sunny Portland, OR</li>
@@ -58,9 +62,8 @@
         <section>
           <h2>Overview</h2>
           <ul>
-            <li>Why I think javascript frameworks also make sense on more traditional TYPO3 sites</li>
-            <li>Require.js for managing JS dependencies on TYPO3 projects</li>
-            <li>A whirlwind tour of Backbone.js as a low-level JS framework</li>
+            <li><a href="http://requirejs.org/" target="_blank">Require.js</a> for managing JS dependencies on TYPO3 projects</li>
+            <li>A whirlwind tour of <a href="http://backbonejs.org/" target="_blank">Backbone.js</a> as a low-level JS framework</li>
             <li>A look at how we got Extbase to talk to Backbone<br />(this is where it's gonna get a little ugly)</li> 
           </ul>
         </section>
@@ -69,7 +72,7 @@
             <h2>Handling Javascript Resources in TYPO3 is kinda imperfect</h2>
           </section>
           <section>
-            <h2>Two main ways to include Javascript</h2>
+            <h2>A few main ways to include Javascript</h2>
             <ul>
               <li class="fragment">Include it in the HTML template</li>
               <li class="fragment">Include it via typoscript</li>
@@ -133,7 +136,7 @@ headerData {
           </section>
           <section>
             <h2>Too many options<br />==<br />a poverty of riches</h2>
-            <ul>
+            <ul class="tight">
               <li class="fragment">PAGE.javascriptLibs</li>
               <li class="fragment">PAGE.includeJSlibs[]</li>
               <li class="fragment">PAGE.includeJSFooterlibs[]</li>
@@ -147,23 +150,22 @@ headerData {
           <section>
             <h2>So many places for things to go wrong</h2>
             <ul>
-              <li>All these possibilities make it hard to find where JS is being included</li>
-              <li>JS should be managed in JS, not in TS</li>
-              <li>Over time, JS dependencies degrade and get messy</li>
-              <li>Extensions include javascript too, which often breaks things</li>
-              <li>Difficult to create a working asset pipeline out of this</li>
-              <li>Really, really slows down JS development to have to include every file</li>
+              <li>Difficult to locate source of JS include</li>
+              <li>Having to modify TS to include a JS file is tedious</li>
+              <li>Controlling order of JS includes is tricky</li>
+              <li>Extensions can insert unwanted JS</li>
+              <li>Hard to implement an asset pipeline outside of T3</li>
             </ul>
           </section>
           <section>
-            <h2>If you use a JS framework, you'll have lots of files...</h2>
+            <h2 class="tight">If you use a JS framework, you'll have lots of files...</h2>
             <img src="images/lotsa_files.png" style="height: 350px" />
             <h3>...and you really don't want to manage them manually in Typoscript.</h3>
           </section>
         </section>
         <section>
           <section>
-            <h2>Require.js to the rescue!</h2>
+            <h2 class="tight">Require.js to the rescue!</h2>
             <blockquote style="margin-top: 2em;">
               "RequireJS is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments, like Rhino and Node. Using a modular script loader like RequireJS will improve the speed and quality of your code."
             </blockquote>
@@ -174,9 +176,9 @@ headerData {
           <section>
             <h2>Some warnings</h2>
             <ul>
-              <li>Require.js <em>requires</em> that you take care in what javascript is included and how it's included</li>
-              <li>If you want to download any TYPO3 extension and have it "just work", this probably isn't for you</li>
-              <li>In many cases you'll have to tweak your jQuery plugins to make them work</li>
+              <li>Require.js <em>requires</em> that you take care around how javascript is included.</li>
+              <li>If you want to download a community TYPO3 extension and have it "just work", this probably isn't for you.</li>
+              <li>In many cases you'll have to tweak your jQuery plugins to make them compatible.</li>
             </ul>
           </section>
           <section>
@@ -184,17 +186,16 @@ headerData {
             <pre><code class="html">
 &lt;script 
   data-main=&quot;typo3conf/ext/t3site/Javascript/Source/Main.js&quot; 
-  src=&quot;typo3conf/ext/t3site/Sites/Javascript/Source/Libs/require.js&quot;
-&gt;&lt;/script&gt;
+  src=&quot;typo3conf/ext/t3site/Sites/Javascript/Source/Libs/require.js&quot;&gt;
+&lt;/script&gt;
             </code></pre>
-            <aside>* We're talking about DEV environments now.<br />The include is a bit different in a PROD environment</aside>
+            <aside>(We're talking about DEV environments now. The include is a bit different in a PROD environment)</aside>
           </section>
           <section>
             <h2>Main.js</h2>
-            <pre><code class="javacsript">
+            <pre style="width: 70%; float: left;" ><code class="javascript">
 require.config({
-  // We put AMD wrappers around non AMD libraries so 
-  // that we can pass them to modules as dependencies
+  // Shim up the non AMD libraries
   shim: {
     'underscore': {
       exports: '_'
@@ -224,18 +225,18 @@ require(
     'Ext/Sjcert/SjApp'
   ]
 );
-
             </code></pre>
-            <a href="https://github.com/castiron/Sustainable-Jersey/blob/master/Source/typo3conf/ext/t3site/Sites/Main/Resources/Public/Javascript/Source/Main.js">(view source)</a>
+            <img src="images/js_include_tree.png" style="width: 25%" />
+            <div class="clear"></div>
+            <aside><a target="_blank" href="https://github.com/castiron/Sustainable-Jersey/blob/master/Source/typo3conf/ext/t3site/Sites/Main/Resources/Public/Javascript/Source/Main.js">(view source)</a></aside>
           </section>
           <section>
             <h3>Wrap all JS in define()</h3>
-            <pre><code class="javascript">
+            <pre style="margin-bottom: 2em"><code class="javascript">
 define({
   color: "black",
   size: "unisize"
-});
-            </code></pre>
+});</code></pre>
             <h3>Pass in dependencies</h3>
             <pre><code class="javascript">
 define(["./cart", "./inventory"], function(cart, inventory) {
@@ -247,11 +248,10 @@ define(["./cart", "./inventory"], function(cart, inventory) {
           cart.add(this);
       }
   }
-});
-            </code></pre>
+});</code></pre>
           </section>
           <section>
-            <h2>What it looks like in practice (switching to coffescript)</h2>
+            <h2>What it looks like in practice</h2>
             <pre><code class="coffeescript">
 define(['backbone', 'jquery', 'underscore'], (Backbone, $, _) ->
 
@@ -266,42 +266,46 @@ define(['backbone', 'jquery', 'underscore'], (Backbone, $, _) ->
       }))
 )
             </code></pre>
+            <aside>(switching to coffescript from here on out)</aside>
           </section>
           <section>
             <h2>Require.js loads dependencies asynchronously</h2>
-            <img src="images/async_loading.png" style="height: 450px" />
+            <img src="images/async_loading.png" style="height: 350px" />
+            <aside><a target="_blank" href="http://sj.dev/certification/participating-communities/">(example)</a></aside>
           </section>
           <section>
-            <h2>In production, we use optimized javascript</h2>
+            <h2>Minify and concatenate on production</h2>
             <ul>
               <li>Require.js combines all scripts into one and minifies them via UglifyJS</li>
               <li>In production, we have a environment = PROD constant that loads the optimized JS</li>
-              <li>Production and dev both have a single line of typoscript for all JS includes</li>
+              <li>Production and dev both have a single line of typoscript for all (or almost all) JS includes</li>
             </ul>
           </section>
-        </section>
-        <section>
-          <h2>Require.js Benefits</h2>
-          <ul>
-            <li>Easily break up your javascript project into multiple files</li>
-            <li>Define dependencies in each file</li>
-            <li>Allows for simple dependency injection</li>
-            <li>Optimization done via CLI (using node), easy to integrate into build process</li>
-            <li>Centralized manifest instead of spread out typoscript includes</li>
-          </ul>
+          <section>
+            <h2>Require.js Benefits</h2>
+            <ul>
+              <li>Easily work with lots of JS files</li>
+              <li>Define dependencies in each file</li>
+              <li>Allows for simple dependency injection</li>
+              <li>Easy to integrate into build process</li>
+            </ul>
+          </section>
         </section>
         <section>
           <section>
             <h2>Backbone!</h2>
             <blockquote>
-              "Backbone.js gives structure to web applications by providing models with key-value binding and custom events, collections with a rich API of enumerable functions, views with declarative event handling, and connects it all to your existing API over a RESTful JSON interface."
+              "<a href="http://backbonejs.org" target="_blank">Backbone.js</a> gives structure to web applications by providing models with key-value binding and custom events, collections with a rich API of enumerable functions, views with declarative event handling, and connects it all to your existing API over a RESTful JSON interface."
             </blockquote>
+            <aside>(let's take a minute to unpack this)</aside>
           </section>
           <section>
             <h2>And Underscore!</h2>
             <blockquote>
-              "Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux, and Backbone.js's suspenders."
+              "<a href="http://underscorejs.org" target="_blank">Underscore</a> provides 80-odd functions that support both the usual functional suspects: map, select, invoke — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on.
+              "
             </blockquote>
+            <aside>(even if you don't take Backbone for a spin, do yourself a favor and checkout underscore)
           </section>
           <section>
             <h2>Backbone is a frontend MVC framework</h2>
@@ -312,13 +316,266 @@ define(['backbone', 'jquery', 'underscore'], (Backbone, $, _) ->
               <li class="fragment">Backbone <strong>COLLECTIONS</strong> are a lot like repositories in ExtBase</li>
               <li class="fragment">Backbone <strong>ROUTES</strong> are like routes.rb in Rails (no real equivalent in T3-land)</li>
             </ul>
+            <aside>(Maybe MVC isn't really the right pattern for the front-end)</aside>
           </section>
           <section>
-              <div style="width: 45%; margin-right: 4%; height: 200px; float: left; border: 1px solid red" data-view="items">
+            <script type="text/html" id="listViewTemplate">
+              <h4>English Romantic Poets:</h4>
+              <ul class="tight small">
+                <% items.each(function(item) { %>
+                    <li style="cursor: pointer;" data-item="<%= item.id %>"><%= item.get('name') %></li>
+                <% }) %>
+              </ul>
+            </script>
+
+            <script type="text/html" id="addViewTemplate">
+              <div style="text-align: left;">
+                <h4>Add a model:</h4>
+                <form class="small" id="new-model-form">
+                  <input id="new-model" type="text" />
+                  <input type="submit" />
+                </form>
               </div>
-              <div style="width: 45%; height: 200px; float: left; border: 1px solid red" data-view="addItem">
-              </div>
+            </script>
+
+            <h2>A Simple Backbone Example</h2>
+            <div class="hover-container" style="width: 40%; margin-right: 4%; height: 200px; float: left;" data-view="list"></div>
+            <div class="hover-container" style="width: 40%; height: 200px; float: left;" data-view="add"></div>
+            <div style="clear:both"></div>
+            <br />
+            <h4>Collection Dump:</h4>
+            <div class="hover-container small" data-view="debug"></div>
           </section>
+          <section>
+            <h2>Bootstrapping</h2>
+            <h4>(We don't need no stinking router)</h4>
+            <pre style="margin-bottom: 2em;"><code>&lt;div data-view=&quot;list&quot;&gt;&lt;/div&gt;
+&lt;div data-view=&quot;add&quot;&gt;&lt;/div&gt;
+
+&lt;h3&gt;The Collection:&lt;/h3&gt;
+&lt;div data-view=&quot;debug&quot;&gt;&lt;/div&gt;</code></pre>
+            <pre><code class="coffeescript">$ ->
+  items = new itemCollection([
+    {name: 'Wordsworth', id: _.uniqueId() },
+    {name: 'Shelley', id: _.uniqueId()},
+  ])
+  listView = new listView({collection: items, el: $('[data-view="list"]')}).render()
+  addView = new addView({collection: items, el: $('[data-view="add"]')}).render()
+  debugView = new debugView({collection: items, el: $('[data-view="debug"]')}).render()</code></pre>
+          </section>
+          <section>
+              <h2>The Template</h2>
+              <pre><code class="coffeescript">&lt;h4&gt;English Romantic Poets:&lt;/h4&gt;
+&lt;ul class=&quot;tight small&quot;&gt;
+  &lt;% items.each(function(item) { %&gt;
+      &lt;li data-item=&quot;&lt;%= item.id %&gt;&quot;&gt;&lt;%= item.get('name') %&gt;&lt;/li&gt;
+  &lt;% }) %&gt;
+&lt;/ul&gt;
+
+&lt;div&gt;
+  &lt;h4&gt;Add a model:&lt;/h4&gt;
+  &lt;form class=&quot;small&quot; id=&quot;new-model-form&quot;&gt;
+    &lt;input id=&quot;new-model&quot; type=&quot;text&quot; /&gt;
+    &lt;input type=&quot;submit&quot; /&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</code></pre>
+          </section>
+          <section>
+            <h2>The List View</h2>
+            <pre><code class="coffeescript">class listView extends Backbone.View
+
+  events: 
+    'click li':   'removeItem'
+
+  template: $('#listViewTemplate').html()
+
+  removeItem: (e) ->
+    id = $(e.currentTarget).data().item
+    @collection.remove(@collection.get(id))
+    console.log @collection.length
+
+  initialize: (options) ->
+    @collection.bind('add', @render, @)
+    @collection.bind('remove', @render, @)
+
+  render: () ->
+    @.$el.html(_.template(@template, {items: @collection}))</code></pre>
+          </section>
+          <section class="coffeescript">
+            <h2>The Add View</h2>
+            <pre><code class="coffeescript">class addView extends Backbone.View
+
+  events:
+    'submit #new-model-form': 'addItem'
+
+  template: $('#addViewTemplate').html()
+
+  addItem: (e) ->
+    e.preventDefault()
+    input = @$el.find('#new-model')
+    name = input.val()
+    if name?
+      input.val('')
+      item = new itemModel({name: name, id: _.uniqueId()})
+      @collection.add(item)
+
+  initialize: (options) ->
+
+  render: () ->
+    @.$el.html(_.template(@template, {items: @collection}))</code></pre>
+          </section>
+          <section>
+            <h2>The Model and Collection</h2>
+            <h4>(In my experience, BB models are often lightweight data containers)</h4>
+            <pre><code>class itemModel extends Backbone.Model
+
+class itemCollection extends Backbone.Collection
+  model: itemModel</code></pre>
+          </section>
+          <section>
+            <h2>Backbone Events</h2>
+            <blockquote>Events is a module that can be mixed in to any object, giving the object the ability to bind and trigger custom named events. Events do not have to be declared before they are bound, and may take passed arguments.</blockquote>
+            <aside>(<a href="http://backbonejs.org/#Events" target="_blank">source</a>)</aside>
+          </section>
+          <section>
+            <h2>Backbone Events</h2>
+            <ul>
+              <li>Views listen for events on collections</li>
+              <li>Views trigger events on models (in response to DOM events)</li>
+              <li>Views listen for events on models</li>
+              <li>Views communicate with each other via events</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Using Backbone with ExtBase</h2>
+          </section>
+          <section>
+            <h2>Some Challenges</h2>
+            <ul>
+              <li>Backbone Sync is Rails/REST-centric.</li>
+              <li>Neither ExtBase nor TYPO3 ships with a REST API.</li>
+              <li>TYPO3 doesn't have a clean Rails-like asset pipeline.</li>
+            </ul>
+            <aside>Don't worry! As they say in the Pacific Northwest, it's all good.</aside>
+          </section>
+          <section>
+            <h2>Roll Your Own REST Controllers</h2>
+            <pre><code class="php">
+  /**
+   * Extbase doesn't natively handle GET, PUT, POST, and DELETE. 
+   * All requests are routed to ?type=1336777437, which is configured 
+   * to call the restDispatchAction. This initialization method 
+   * intercepts the request before it goes to the dispatch method 
+   * (which does nothing), and before the argument validation has taken 
+   * place. This method looks at the request type and forwards to the 
+   * corresponding CRUD action. Because TYPO3 can't do simple rest 
+   * requests (eg. /get/45 where 45 is the UID of a record) without 
+   * realURL configuration, we still expect record IDs to be passed as 
+   * a getVar (&tx_sjcert_comment[comment]). However, other request 
+   * data (for PUT and POST) should be passed in the request payload.
+   */
+  public function initializeRestDispatchAction() {
+    $requestType = $_SERVER['REQUEST_METHOD'];
+    switch ($requestType) {
+        case 'GET':
+            if($this->request->hasArgument($this->modelName)) {
+                $this->forward('restShow');
+            }
+            $this->forward('restList');
+            break;
+        case 'PUT':
+            $modelName = $this->modelName;
+            $requestNameSpace = $this->requestNameSpace;
+            $payload = json_decode(file_get_contents('php://input'));
+            $payload->$requestNameSpace->$modelName = $this->request->getArgument($modelName);
+            $this->request->setArguments((array)$payload->$requestNameSpace);
+            $this->forward('restUpdate');
+            break;
+        case 'POST':
+            $requestNameSpace = $this->requestNameSpace;
+            $payload = json_decode(file_get_contents('php://input'));
+            $this->request->setArguments((array)$payload->$requestNameSpace);
+            $this->forward('restAdd');
+            break;
+        case 'DELETE':
+            $this->forward('restDelete');
+    }
+  }
+            </code></pre>
+          </section>
+          <section>
+            <h2 class="tight">Use CICBase's JSON Object Service</h2>
+            <h4>(or roll your own)</h4>
+            <ul>
+              <li>Lets you annotate the model properties and methods with @JSONExpose</li>
+              <li>IMO, A better way to do this (in the future) would be like Rails' Active Model Serializer gem</li>
+              <li>Can recursively serialized nested objects</li>
+              <li>Also, <a target="_blank" href="https://github.com/castiron/cicbase/blob/master/Classes/ViewHelpers/JsonBootstrapViewHelper.php">this view helper</a></li>
+            </ul>
+            <aside>(<a target="_blank" href="https://github.com/castiron/cicbase/blob/master/Classes/Service/JsonObjectService.php">Source</a>)</aside>
+          </section>
+          <section>
+            <h2>Set Persistence Endpoints</h2>
+            <pre style="margin-bottom: 2em;"><code class="coffeescript">class CommentCollection extends Backbone.Collection
+  model: CommentModel
+  url: '?type=1336777437'</code></pre>
+            <pre><code class="coffeescript">class CommentModel extends Backbone.Model
+
+  urlRoot: '?type=1336777437'
+
+  # Because TYPO3 doesn't easily accept typical REST urls without some 
+  # RealURL config, we change how the URL is generated so that the ID 
+  # is passed as getVar instead of /ID
+  url: ->
+    base = @.urlRoot
+    if @.isNew() then return base
+    return base + '&tx_sjcert_comment[comment]=' + encodeURIComponent(this.id)</code></pre>
+          </section>
+          <section>
+            <h2>Or consider dumping REST altogether and overriding Backbone's Sync Method</h2>
+            <aside><a href="http://backbonejs.org/docs/backbone.html" target="_blank">(documented source)</a></aside>
+          </section>
+          <section>
+            <h2 class="tight">Render your Backbone views in Fluid</h2>
+            <h4>(or not)</h4>
+            <ul>
+              <li>On SJ, we include our Backbone views as partials. <a href="https://github.com/castiron/Sustainable-Jersey/tree/master/Source/typo3conf/ext/sjcert/Resources/Private/Partials/JavascriptTemplates" target="_blank">(example)</a></li>
+              <li>In some cases, rendering the template dynamically on the server is helpful. <a href="https://github.com/castiron/Sustainable-Jersey/blob/master/Source/typo3conf/ext/sjcert/Resources/Private/Templates/Municipality/Index.html" target="_blank">(example)</a></li>
+              <li>Bootstrap JSON data on the page for faster loading. <a href="https://github.com/castiron/Sustainable-Jersey/blob/master/Source/typo3conf/ext/sjcert/Resources/Private/Templates/Action/List.html#L6" target="_blank">(example)</a></li>
+              <li>Ideally, though, it would be nice to include these templates via a separate file or files.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>If we still have time,<br />let's look at some examples.</h2>
+            <p>
+              DIDH: <a href="http://dhdebates.gc.cuny.edu/" target="_blank">site</a> / <a href="https://github.com/castiron/didh/tree/master/app/assets/javascripts/backbone" target="_blank">source</a>
+            </p>
+            <p>
+              SJ: <a href="http://sj.dev/certification/participating-communities/" target="_blank">site</a> / <a href="https://github.com/castiron/Sustainable-Jersey/tree/master/Source/typo3conf/ext/t3site/Sites/Main/Resources/Public/Coffeescript/Ext/Sjcert" target="_blank">source</a>
+            </p>
+            <p>
+              Norton Social: <a href="http://nortonsocial-videos.dev/" target="_blank">site</a> / <a href="https://github.com/castiron/nortonsocial-videos" target="_blank">source</a>
+          </section>
+
+        </section>
+
+        <section>
+          <h2>Thanks for listening!</h2>
+          <p style="margin-bottom: 1em;">
+            Slideshow at <a href="https://github.com/zdavis/t3con-na-13">https://github.com/zdavis/t3con-na-13</a>
+          </p>
+          <p style="margin-bottom: 1em;">
+            CICBase is available at <a href="https://github.com/castiron/cicbase">https://github.com/castiron/cicbase</a>
+          </p>
+          <p style="margin-bottom: 1em;">
+            I generally fail to blog at <a href="http://castironcoding.com/blog">http://castironcoding.com/blog</a>
+          </p>
+          <p style="margin-bottom: 1em;">
+            Follow me on twitter: <a href="http://twitter.com/zdavis">@zdavis</a>
+          </p>
         </section>
       </div>
 
@@ -354,6 +611,8 @@ define(['backbone', 'jquery', 'underscore'], (Backbone, $, _) ->
       });
 
     </script>
+
+    <script src="js/site.js"></script>
 
   </body>
 </html>
